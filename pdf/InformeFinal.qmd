@@ -1,0 +1,873 @@
+---
+title: "Informe Final: Tablas de Vida de Yucatán 2010, 2019, 2021"
+author: "De Anda Ruiz Carlos, Ruiz Mora Jeremy Axel"
+format: pdf
+toc: true
+number-sections: true
+eval: false 
+---
+
+## ***Introducción***
+
+Contexto Demográfico del Estado de Yucatán Yucatán es un estado con una identidad cultural profunda y única en México, fuertemente marcada por su herencia maya y su historia aislada del resto del país hasta bien entrado el siglo XX.
+
+***1. Población Total y Distribución Población Total:*** De acuerdo con el Censo 2020 del INEGI, Yucatán tiene una población de 2,320,898 habitantes.
+
+\-*Posición Nacional:* Ocupa el lugar 21 a nivel nacional por número de habitantes, lo que lo sitúa en el grupo de estados con una población media.
+
+\-*Densidad de Población:* Aproximadamente 58.8 habitantes por km². Esta densidad es media-alta para el estándar mexicano, pero la población está muy concentrada.
+
+***2. Distribución: Urbana vs. Rural Yucatán tiene una distribución peculiar:***
+
+\-*Población Urbana:* Alrededor del 85% de la población vive en localidades urbanas. Esta es una cifra muy por encima del promedio nacional, indicando un alto grado de urbanización.
+
+\-*Población Rural:* Aproximadamente el 15% vive en localidades rurales.
+
+Esta alta urbanización se explica por la concentración en su capital y unas pocas ciudades principales, mientras que el interior del estado está salpicado de numerosas localidades pequeñas (comisarías y haciendas).
+
+***3. Principales Ciudades y Zonas Metropolitanas Mérida:*** La capital del estado es el corazón demográfico, económico y cultural. La Zona Metropolitana de Mérida (que incluye a Kanasín, Umán, Conkal, entre otros municipios) concentra a más de 1.3 millones de personas, es decir, más de la mitad de la población total del estado.
+
+\-*Ciudades Medianas:* Otras ciudades importantes, pero de mucho menor tamaño, son:
+
+-   Valladolid (Oriente del estado)
+
+-   Tizimín (Noreste, importante por su actividad ganadera)
+
+-   Progreso (Puerto principal y centro turístico costero)
+
+-   Tekax (Sur del estado)
+
+***4. Composición Étnica e Identidad Maya*** Yucatán es el estado con la población de hablantes de lengua indígena más numerosa de México en términos absolutos.
+
+\-*Población Indígena (por autoadscripción):* Más del 60% de la población yucateca se considera a sí misma indígena.
+
+\-*Hablantes de Lengua Indígena:* Según el Censo 2020, 519,240 personas hablan una lengua indígena, principalmente el maya yucateco. Esto representa aproximadamente el 23% de la población del estado, la proporción más alta entre los estados mexicanos.
+
+\-*Bilingüismo:* Existe un alto grado de bilingüismo (maya-español), especialmente entre la población adulta en las zonas rurales y en muchos barrios de Mérida.
+
+***5. Indicadores Sociodemográficos Clave Edad Mediana:*** Es de aproximadamente 31 años, lo que indica una población joven-adulta, aunque en proceso de envejecimiento.
+
+\-*Tasa de Fecundidad:* Ha descendido notablemente y se sitúa por debajo del promedio nacional (alrededor de 2.1 hijos por mujer), acercándose a la tasa de reemplazo.
+
+\-*Esperanza de Vida:* Alta, ronda los 76 años, similar al promedio nacional.
+
+\-*Grado de Marginación:* El CONAPO clasifica a Yucatán como un estado con un grado de marginación medio. Sin embargo, existe una fuerte disparidad: mientras Mérida y las ciudades principales tienen índices muy bajos, muchos municipios del interior y sur del estado (la "zona maicera") presentan niveles de marginación altos y muy altos.
+
+***6. Migración Yucatán tiene un perfil migratorio particular:***
+
+\-*Migración Interna:* Es un estado receptor. Atrae población de otros estados del sureste (Campeche, Quintana Roo, Chiapas, Tabasco) que buscan oportunidades de estudio y trabajo en Mérida.
+
+\-*Migración Internacional:*
+
+\-*Inmigración:* Ha experimentado un crecimiento significativo en la última década, especialmente de estadounidenses, canadienses, colombianos, venezolanos y cubanos que eligen Yucatán para retirarse, trabajar de forma remota o iniciar negocios. También existe una comunidad menonita establecida.
+
+\-*Emigración:* Históricamente, la emigración de yucatecos al extranjero (principalmente a EUA) ha sido baja comparada con otros estados del país.
+
+***7. Tendencias y Dinámicas Recientes Metropolización de Mérida:*** El crecimiento de la Zona Metropolitana de Mérida es la tendencia demográfica más importante, atrayendo población e inversión, pero también generando desafíos de movilidad, vivienda y servicios.
+
+\-*Envejecimiento Poblacional:* Como el resto de México, Yucatán comienza a transitar hacia una población más envejecida, lo que tendrá implicaciones para los sistemas de salud y pensiones.
+
+\-*Presión sobre la Costa:* El desarrollo turístico e inmobiliario en la costa norte (Progreso, Chicxulub, Telchac) está atrayendo nueva población, tanto nacional como extranjera, modificando la dinámica demográfica local.
+
+\-*Revitalización de la Cultura Maya:* Hay un movimiento creciente de orgullo y revitalización de la lengua y cultura maya, especialmente entre los jóvenes.
+
+## **Diagrama de flujo**
+
+![](Diagrama_flujo_PF.jpg){width="100%"}
+
+## **Fuentes de datos**
+
+Censos 2010 y 2020: Obtenidos de [INEGI](https://www.inegi.org.mx/programas/ccpv/)
+
+Defunciones 1990-2021: Obtenidas de [INEGI](https://www.inegi.org.mx/sistemas/olap/proyectos/bd/continuas/mortalidad/)
+
+## **Proceso de limpieza**
+
+*Procesamiento de los Censos de Población (2010 y 2020)*
+
+Se obtuvieron las bases de datos del INEGI correspondientes a los censos de 2010 y 2020, aplicando filtros por edad, sexo, entidad y municipio para el estado de Yucatán. En el script 00_pre_process, se cargaron diversas librerías y posteriormente los archivos censales.
+
+La limpieza de la tabla del censo 2010 inició con la eliminación de los encabezados originales. Se realizó una edición de texto en la variable de edad, removiendo términos como "de", sustituyendo "No" por NA y transformando los valores a numéricos. Asimismo, se eliminaron comas en las cifras poblacionales y se reagruparon las edades de 1 a 4 años en un solo grupo. La tabla se transformó a formato longitudinal mediante la función melt y se verificó la suma total de la población para asegurar la integridad de los datos. El mismo procedimiento se aplicó al censo de 2020.
+
+Posteriormente, se unificaron los censos de 2010 y 2020 en un único objeto denominado censos. Se procedió a realizar el prorrateo de valores perdidos, distribuyendo las observaciones con edad desconocida entre los grupos etarios definidos, considerando año y sexo. Para ello, se calculó la proporción poblacional (p_pop) de cada grupo de edad dentro de su año y sexo correspondiente. Luego, se tomó el total de población con edad missing (na_pop) y se distribuyó proporcionalmente según p_pop, obteniendo así la población ajustada (pop_adj). Este resultado se almacenó en censos_pro. Se comprobó que las sumas poblacionales antes y después del prorrateo coincidieran, garantizando que no hubiera pérdida de datos.
+
+*Procesamiento de las Defunciones Generales*
+
+Se descargó el archivo de defunciones registradas del INEGI. Se asignaron nombres a las columnas y se filtraron los datos a partir de 1990. Se estandarizaron los grupos de edad a números enteros, se removieron comas y se convirtieron las variables a numéricas. Se realizó una verificación por año y se imputaron los años no especificados tomando la información de la región (reg).
+
+A continuación, se creó una tabla para el prorrateo de defunciones, con las sumas de hombres, mujeres y sexo no especificado (ns) por año y edad. Se distribuyeron proporcionalmente los valores de ns entre hombres y mujeres, obteniendo las variables ajustadas male_adj y female_adj. Se verificó que el total de defunciones se mantuviera. La tabla se transformó a formato longitudinal con melt.
+
+Luego, se realizó un segundo prorrateo, esta vez para las edades missing. Se calculó la proporción de cada edad dentro de su año y sexo (p_deaths), se tomó el total de defunciones con edad missing (na_deaths) y se distribuyó proporcionalmente, obteniendo las defunciones ajustadas (deaths_adj). El resultado se guardó en def_pro.
+
+*Procesamiento de las Defunciones por Homicidio*
+
+Se repitió el mismo proceso de limpieza y prorrateo para los datos de defunciones por homicidio del INEGI, guardando el resultado en def_pro_hom.
+
+## **Formulas Utilizadas**
+
+*Tasa Específica de Mortalidad*
+
+$$
+{}_nm_x = \frac{{}_nD_x}{{}_nN_x}
+$$
+
+donde:
+
+${}_nm_x$: Tasa de mortalidad entre las edades $x$ y $x+n$
+
+${}_nD_x$: Defunciones entre las edades $x$ y $x+n$
+
+${}_nN_x$: Población entre las edades $x$ y $x+n$
+
+*Suavizamiento por Media Móvil (3 años)* $$
+{}_nD^s_x = \frac{{}_nD^{(y-1)}_x + {}_nD^{(y)}_x + {}_nD^{(y+1)}_x}{3}
+$$
+
+donde:
+
+${}_nD^s_x$: Defunciones suavizadas para el año $y$
+
+${}_nD^{(y-1)}_x$, ${}_nD^{(y)}_x$, ${}_nD^{(y+1)}_x$: Defunciones en los años $y-1$, $y$, $y+1$
+
+*Crecimiento Exponencial*
+
+Se utilizó el método de crecimiento exponencial para interpolar la población entre censos. La fórmula utilizada es:
+
+$$
+N(t) = N_0 \cdot e^{r \cdot (t - t_0)}
+$$
+
+donde:
+
+-   $N(t)$: Población en el tiempo $t$
+
+-   $N_0$: Población inicial
+
+-   $r$: Tasa de crecimiento
+
+-   $t_0$: Tiempo inicial
+
+*Probabilidad de Supervivencia*
+
+$$
+{}_np_x = 1 - {}_nq_x
+$$
+
+donde:
+
+${}_np_x$: Probabilidad de sobrevivir entre las edades $x$ y $x+n$
+
+*Tabla de Vida - Probabilidad de Muerte*
+
+$$
+q_x = \frac{n \cdot m_x}{1 + (n - a_x) \cdot m_x}
+$$
+
+*Esperanza de Vida*
+
+$$
+e_x = \frac{T_x}{l_x}
+$$
+
+*Descomposición de Arriaga*
+
+$$
+\Delta e_0 = \sum \left[ \frac{l_x^A}{l_0^A} \left( \frac{L_x^B}{l_x^B} - \frac{L_x^A}{l_x^A} \right) + \frac{T_{x+1}^B}{l_0^B} \left( \frac{l_x^A}{l_x^B} - \frac{l_{x+1}^A}{l_{x+1}^B} \right) \right]
+$$
+
+*Cálculo de Sobrevivientes* $$
+l_{x+n} = l_x \cdot {}_np_x
+$$
+
+donde:
+
+-   $l_{x+n}$: Número de sobrevivientes a la edad $x+n$
+
+-   $l_x$: Número de sobrevivientes a la edad $x$
+
+-   ${}_np_x$: Probabilidad de supervivencia entre $x$ y $x+n$
+
+*Cálculo de Defunciones entre Edades*
+
+$$
+{}_nd_x = l_x - l_{x+n}
+$$
+
+o alternativamente:
+
+$$
+{}_nd_x = l_x \cdot {}_nq_x
+$$
+
+donde:
+
+${}_nd_x$: Defunciones ocurridas entre las edades $x$ y $x+n$
+
+${}_nq_x$: Probabilidad de morir entre $x$ y $x+n$
+
+*Años-Persona Vividos entre Edades*
+
+$$
+{}_nL_x = (n \cdot l_{x+n}) + ({}_na_x \cdot {}_nd_x)
+$$
+
+Para el último grupo de edad: $$
+{}_{\infty}L_{x^*} = \frac{l_{x^*}}{{}_{\infty}m_{x^*}}
+$$
+
+*Años-Persona por Vivir* $$
+T_x = \sum_{a=x}^{\omega} {}_nL_a
+$$
+
+*Esperanza de Vida* $$
+e_x = \frac{T_x}{l_x}
+$$
+
+# ***Algoritmos utilizados:***
+
+```{r,warning=FALSE,message=FALSE, eval=TRUE}
+lt_abr <- function(x, mx, sex="f", IMR=NA){
+  
+  m <- length(x)
+  n <- c(diff(x), NA)  
+  
+  ax <- n/2    
+  
+  # Pag. 4 notas de clase - cuadro
+  
+  ## Coale y Demeny edades 0 a 1
+  
+  if(sex=="m"){
+    if(mx[1]>=0.107){ ax[1] <- 0.330 }else{
+      ax[1] <- 0.045+2.684*mx[1]
+    } 
+  } else if(sex=="f"){
+    if(mx[1]>=0.107){ ax[1] <- 0.350 }else{
+      ax[1] <- 0.053+2.800*mx[1]
+    }  
+  }
+  
+  ## Coale y Demeny edades 1 a 4
+  if(sex=="m"){
+    if(mx[1]>=0.107){ ax[2] <- 1.352 }else{
+      ax[2] <- 1.651-2.816*mx[1]
+    } 
+  } else if(sex=="f"){
+    if(mx[1]>=0.107){ ax[2] <- 1.361 }else{
+      ax[2] <- 1.522-1.518*mx[1]
+    }  
+  }
+  
+  # Probabilidad de muerte
+  qx <- (n*mx)/(1+(n-ax)*mx)
+  qx[m] <- 1
+  
+  # Proba de sobrevivir
+  px <- 1-qx
+  
+  # l_x
+  lx <- 100000 * cumprod(c(1,px[-m]))
+  
+  # Defunciones
+  dx <- c(-diff(lx), lx[m])
+  
+  # Años persona vividos
+  Lx <- n* c(lx[-1], 0) + ax*dx
+  Lx[m] <- lx[m]/mx[m]
+  
+  # Años persona vividos acumulados
+  
+  Tx <- rev(cumsum(rev(Lx)))
+  
+  # Esperanza de vida
+  ex <- Tx/lx
+  
+  return(data.table(x, n, mx, ax, qx, px, lx, dx, Lx, Tx, ex))
+  
+}
+
+# Uso la función lt_abr
+# lt_abr(x, mx)
+
+# 3. Crecimiento exponencial ----
+
+expo <- function(N_0, N_T, t_0, t_T, t){
+  
+  dt <- decimal_date(as.Date(t_T)) - decimal_date(as.Date(t_0))
+  r <- log(N_T/N_0)/dt
+  
+  h <- t - decimal_date(as.Date(t_0))
+  N_h <- N_0 * exp(r*h)  
+  
+  return(N_h)
+  
+}
+
+# Descomposición, formula de Arriaga ----
+arriaga_decomp <- function(data, y1, y2, sex_filter){
+  
+  # Fórmula para los grupos de edad
+  suppressWarnings({
+    dt_calc[, delta := (lx1 / l0_1) * ( (Lx2/lx2) - (Lx1/lx1) ) + 
+              (Tx2_next / l0_1) * ( (lx1/lx2) - (lx1_next/lx2_next) ) ]
+    
+    # Último grupo de edad 
+    n <- nrow(dt_calc)
+    dt_calc[n, delta := (lx1 / l0_1) * ( (Tx2/lx2) - (Tx1/lx1) )]})
+}
+```
+
+## **Carga de paquetes**
+
+Los paquetes que fueron utilizados fueron los siguientes:
+
+```{r}
+#Carga de paquetes y funciones ----
+library(MortalityLaws)  
+library(data.table)
+library(dplyr)
+library(tidyr)
+library(kableExtra)
+library(readxl)
+library(reshape2)
+library(lubridate)
+library(ggplot2)
+library(knitr)
+source("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/script/funciones.R")
+
+```
+
+## **Codigo para los calculos**
+
+*Cálculo de APV*:
+
+Se calcula la población a mitad de año (APV) para 2010, 2019 y 2021 usando interpolación exponencial entre los censos de 2010 y 2020.
+
+```{r}
+#Carga de tabla de datos ----
+censos_pro <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/censos_pro.csv")
+
+# Cálculo de años persona vividos (población a mitad de año) 2010----
+N <- expo(censos_pro[year==2010] %>% .$pop, 
+          censos_pro[year==2020] %>% .$pop, 
+          t_0 = "2010-06-25", t_T = "2020-03-15", t = 2010.5)
+
+apv2010 <- censos_pro[year==2010, .(age, sex, N)]
+apv2010[ , year:= 2010]
+
+# Cálculo de años persona vividos (población a mitad de año) 2019 ----
+N <- expo(censos_pro[year==2010] %>% .$pop, 
+          censos_pro[year==2020] %>% .$pop, 
+          t_0 = "2010-06-25", t_T = "2020-03-15", t = 2019.5)
+apv2019 <- censos_pro[year==2020, .(age, sex, N)]
+apv2019[ , year:= 2019]
+
+# Cálculo de años persona vividos (población a mitad de año) 2021----
+N <- expo(censos_pro[year==2010] %>% .$pop, 
+          censos_pro[year==2020] %>% .$pop, 
+          t_0 = "2010-06-25", t_T = "2020-03-15", t = 2021.5)
+
+apv2021 <- censos_pro[year==2020, .(age, sex, N)]
+apv2021[ , year:= 2021]
+
+
+```
+
+***Defunciones*****:**
+
+Se promedian las defunciones de 2009-2011 para 2010, 2018-2019 para 2019 y se usan las de 2021 para 2021.
+
+```{r}
+## Carga de tablas de datos ----
+def_pro <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/def_pro.csv") %>% 
+  .[year %in% c(2009, 2010, 2011, 2018, 2019, 2021)]
+
+## calculo del promedio para el ano de referencia
+def_pro[ , year_new := ifelse( year %in% 2009:2011, 
+                               2010,
+                               ifelse( year %in% 2018:2019,
+                                       2019,
+                                       year ) ) ]
+# datos preparados de defunciones
+def <- 
+  def_pro[ , 
+           .( deaths = mean( deaths ) ),
+           .( year = year_new, sex, age ) ] 
+
+```
+
+***Tablas de vida*****:**
+
+Se unen las defunciones con los $APV$ y se calcula la tasa de mortalidad $mx$
+
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
+
+# Carga de tablas de datos ----
+
+library(data.table)   # <-- ESTA FALTA
+library(dplyr)
+library(kableExtra)
+## Carga de tablas de datos ----  
+def <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/def.csv")
+apv <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/apv.csv") 
+
+# Unión de tablas de Años Persona Vividos y Defunciones ----
+lt_input <- setDT(left_join(apv, def, by = c("year", "sex", "age")))
+
+# Cálculo de mx ----
+lt_input[ , mx := deaths/N]
+lt_input[ , sex := if_else(sex=="male", "m", "f")]
+
+
+# Tablas de mortalidad
+lt_output <- data.table()
+
+for( s in c( 'm', 'f' ) ){
+  for( y in unique( lt_input$year ) ){
+    
+    temp_dt <- lt_input[ sex == s & year == y ]
+    
+    temp_lt <-
+      lt_abr(x = temp_dt$age, 
+             mx = temp_dt$mx, 
+             sex = s) %>%
+      setDT %>%
+      .[ , year := y ] %>%
+      .[ , sex := s ]
+    
+    lt_output <- 
+      rbind(
+        lt_output,
+        temp_lt[ , .( lt_desc = 'LT VR/Census, MEX',
+                      year = y, 
+                      sex,
+                      age = x, 
+                      mx = round( mx, 6 ), 
+                      qx = round( qx, 6 ),
+                      ax = round( ax, 2 ), 
+                      lx = round( lx, 0 ), 
+                      dx = round( dx, 0 ), 
+                      Lx = round( Lx, 0 ), 
+                      Tx = round( Tx, 0 ), 
+                      ex = round( ex, 2 )) ]
+      )
+    
+  }
+  
+}
+
+## Esperanzas de vida al nacer ----
+# 1. Tabla de Esperanza de Vida al Nacer (e0)
+library(data.table)
+library(dplyr)
+library(kableExtra)
+
+# Convertir a data.table si no lo es
+lt_output[age == 0] %>% 
+  as.data.table() %>%   # Convertir a data.table
+  dcast(year ~ sex, value.var = "ex") %>%
+  kbl(
+    caption = "Esperanza de vida al nacer ($e_0$)",
+    col.names = c("Año", "Mujeres", "Hombres"),
+    digits = 2,
+    align = "c",
+    booktabs = TRUE,
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    latex_options = c("striped", "hold_position"),
+    full_width = FALSE,
+    position = "center"
+  ) %>%
+  add_header_above(c(" " = 1, "Sexo" = 2))
+
+
+## Mortalidad infantil ----
+lt_output[ age == 0 ] %>% 
+  dcast( year ~ sex, value.var = 'qx' ) %>%
+  kbl(
+    caption = "Mortalidad Infantil ($q_0$)",
+    col.names = c("Año", "Mujeres", "Hombres"),
+    digits = 5, # Usamos 5 decimales porque qx es una probabilidad pequeña
+    align = "c",
+    booktabs = TRUE,
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    latex_options = c("striped", "hold_position"),
+    full_width = FALSE,
+    position = "center"
+  ) %>%
+  add_header_above(c(" " = 1, "Sexo" = 2))
+```
+
+*Descomposicion de Arriaga*:
+
+Esta técnica nos permite desglosar por qué cambió la esperanza de vida en Yucatán entre dos momentos
+
+```{r}
+# Aplicar descomposición por sexo y períodos
+descomposicion_resultados <- list()
+
+# Período 2010-2019
+for (sexo in c("m", "f")) {
+  lt_2010 <- lt_output[year == 2010 & sex == sexo]
+  lt_2019 <- lt_output[year == 2019 & sex == sexo]
+  
+  descomp <- descomposicion_arriaga(lt_2010, lt_2019)
+  descomp$tabla_contribuciones[, `:=`(
+    sexo = sexo,
+    periodo = "2010-2019"
+  )]
+  descomposicion_resultados[[paste0("2010_2019_", sexo)]] <- descomp
+}
+
+# Período 2019-2021
+for (sexo in c("m", "f")) {
+  lt_2019 <- lt_output[year == 2019 & sex == sexo]
+  lt_2021 <- lt_output[year == 2021 & sex == sexo]
+  
+  descomp <- descomposicion_arriaga(lt_2019, lt_2021)
+  descomp$tabla_contribuciones[, `:=`(
+    sexo = sexo,
+    periodo = "2019-2021"
+  )]
+  descomposicion_resultados[[paste0("2019_2021_", sexo)]] <- descomp
+}
+
+# Consolidar resultados
+tabla_descomposicion <- rbindlist(
+  lapply(descomposicion_resultados, function(x) x$tabla_contribuciones)
+)
+```
+
+*Causa Eliminada*
+
+Eliminamos los homicidios de las causas de muerte para ver como se ven afectados los números
+
+```{r}
+# Carga de datos ----
+
+def_homicidios <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/def_pro_hom.csv")
+def_totales <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/def_pro.csv")
+apv <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/apv.csv")
+lt_output <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/lt_yuc.csv")
+
+# Verificar y corregir estructura de datos ----
+cat("Estructura de lt_output:\n")
+print(names(lt_output))
+cat("\n")
+
+# Si lt_output tiene columna 'x' en lugar de 'age', renombrar
+if ("x" %in% names(lt_output) & !"age" %in% names(lt_output)) {
+  lt_output[, age := x]
+  lt_output[, x := NULL]
+}
+
+# Procesamiento para causa eliminada ----
+
+## Filtrar años de interés para homicidios ----
+def_homicidios <- def_homicidios[year %in% c(2009, 2010, 2011, 2018, 2019, 2021)]
+
+## Crear años de referencia (igual que en el procesamiento original) ----
+def_homicidios[, year_new := ifelse(year %in% 2009:2011, 2010,
+                                    ifelse(year %in% 2018:2019, 2019, 2021))]
+
+## Promediar homicidios por año de referencia ----
+homicidios_promedio <- def_homicidios[, .(deaths_homicidios = mean(deaths)), 
+                                      by = .(year = year_new, sex, age)]
+
+## Unir homicidios con defunciones totales ----
+def_completa <- merge(def_totales, homicidios_promedio, 
+                      by = c("year", "sex", "age"), 
+                      all.x = TRUE)
+
+## Si no hay datos de homicidios para alguna observación, asumir 0 ----
+def_completa[is.na(deaths_homicidios), deaths_homicidios := 0]
+
+## Calcular defunciones por otras causas (excluyendo homicidios) ----
+def_completa[, deaths_otras := deaths - deaths_homicidios]
+
+## Calcular proporción de homicidios ----
+def_completa[, prop_homicidios := deaths_homicidios / deaths]
+def_completa[is.infinite(prop_homicidios) | is.na(prop_homicidios), prop_homicidios := 0]
+
+# Unir con población para calcular tasas ----
+
+## Unir defunciones completas con población ----
+lt_input_homicidios <- merge(apv, def_completa, by = c("year", "sex", "age"), all.x = TRUE)
+
+## Calcular tasas de mortalidad ----
+# mx totales (todas las causas)
+lt_input_homicidios[, mx_todas_causas := deaths / N]
+
+# mx sin homicidios
+lt_input_homicidios[, mx_sin_homicidios := deaths_otras / N]
+
+# Asegurar que no hay valores negativos
+lt_input_homicidios[mx_sin_homicidios < 0, mx_sin_homicidios := 0]
+
+# Convertir sexo a formato corto
+lt_input_homicidios[, sex := ifelse(sex == "male", "m", "f")]
+
+# Construcción de tablas de vida sin homicidios ----
+
+lt_sin_homicidios <- data.table()
+
+for (s in c('m', 'f')) {
+  for (y in c(2010, 2019, 2021)) {
+    
+    cat("Procesando:", s, "-", y, "\n")
+    
+    # Filtrar datos para el sexo y año
+    temp_dt <- lt_input_homicidios[sex == s & year == y]
+    
+    # Construir tabla de vida sin homicidios
+    temp_lt <- lt_abr(
+      x = temp_dt$age,
+      mx = temp_dt$mx_sin_homicidios,
+      sex = s
+    )
+    
+    # Convertir a data.table y agregar columnas
+    temp_lt <- as.data.table(temp_lt)
+    temp_lt[, year := y]
+    temp_lt[, sex := s]
+    temp_lt[, causa := "sin_homicidios"]
+    
+    # Renombrar columna 'x' a 'age' para consistencia
+    if ("x" %in% names(temp_lt)) {
+      temp_lt[, age := x]
+      temp_lt[, x := NULL]
+    }
+    
+    lt_sin_homicidios <- rbind(lt_sin_homicidios, temp_lt, fill = TRUE)
+  }
+}
+
+# Preparar datos para comparación ----
+
+## Agregar identificador de causa a las tablas originales ----
+lt_output[, causa := "todas_causas"]
+
+## Verificar columnas disponibles ----
+cat("Columnas en lt_output:", names(lt_output), "\n")
+cat("Columnas en lt_sin_homicidios:", names(lt_sin_homicidios), "\n")
+
+## Seleccionar columnas comunes para comparación ----
+columnas_comunes <- intersect(names(lt_output), names(lt_sin_homicidios))
+columnas_comunes <- columnas_comunes[columnas_comunes %in% 
+                                       c("year", "sex", "age", "mx", "qx", "lx", "dx", "Lx", "Tx", "ex", "causa")]
+
+cat("Columnas comunes para comparación:", columnas_comunes, "\n")
+
+## Combinar tablas ----
+lt_comparacion <- rbind(
+  lt_output[, ..columnas_comunes],
+  lt_sin_homicidios[, ..columnas_comunes],
+  fill = TRUE
+)
+
+# Análisis de resultados ----
+
+## Esperanza de vida al nacer comparativa ----
+e0_comparacion <- lt_comparacion[age == 0, .(year, sex, ex, causa)]
+
+## Diferencia en esperanza de vida debido a homicidios ----
+e0_todas <- e0_comparacion[causa == "todas_causas", .(year, sex, ex_todas = ex)]
+e0_sin <- e0_comparacion[causa == "sin_homicidios", .(year, sex, ex_sin = ex)]
+
+e0_dif <- merge(e0_todas, e0_sin, by = c("year", "sex"))
+e0_dif[, dif_homicidios := ex_sin - ex_todas]  # Cambio aquí: ex_sin - ex_todas
+
+cat("Diferencia en esperanza de vida debido a homicidios:\n")
+print(e0_dif)
+
+```
+
+**Graficas**
+
+*Grafica de APV 2010*
+
+![](imagenes/apv/apv_2010.png){width="100%"}
+
+*Grafica de APV 2019*
+
+![](imagenes/apv/apv_2019.png){width="100%"}
+
+*Grafica de APV 2021*
+
+![](imagenes/apv/apv_2021.png){width="100%"}
+
+*Grafica de tasa de mortalidad por año y sexo*
+
+![](imagenes/defunciones/tasa_mx_por_añoysexo.png){width="100%"}
+
+*Grafica evolucion de tasa de mortaliadad*
+
+![](imagenes/defunciones/evolucion_mx.png){width="100%"}
+
+*Grafica de* $q_x$ por año y sexo
+
+![](imagenes/defunciones/qx_por_añoysexo.png){width="100%"}
+
+*Grafica de la descomposicion de Arriaga*
+
+![](imagenes/ev/cambios_de_ev.png){width="100%"}
+
+*Causa Eliminida*
+
+![](imagenes/homicidios/e0_con_sin_homicidios.png){width="100%"}
+
+![](imagenes/homicidios/perdida_e0_homicidios.png){width="100%"}
+
+![](imagenes/homicidios/qx_con_sin_homicidios_2021.png){width="100%"}
+
+**Tabla de mortalidad**
+
+```{r, WARNING = FALSE, ECHO = FALSE, eval=TRUE}
+lt_output <- fread("C:/Users/Charlitos/OneDrive/Documentos/FAC CIENCIAS/Demo/Demo_Final_Proj/data/lt_yuc.csv")
+lt_output <- data.table()
+
+for( s in c( 'm', 'f' ) ){
+  for( y in unique( lt_input$year ) ){
+    
+    temp_dt <- lt_input[ sex == s & year == y ]
+    
+    temp_lt <-
+      lt_abr(x = temp_dt$age, 
+             mx = temp_dt$mx, 
+             sex = s) %>%
+      setDT %>%
+      .[ , year := y ] %>%
+      .[ , sex := s ]
+    
+    lt_output <- 
+      rbind(
+        lt_output,
+        temp_lt[ , .( lt_desc = 'LT VR/Census, MEX',
+                      year = y, 
+                      sex,
+                      age = x, 
+                      "$m_x$" = round( mx, 6 ), 
+                      "$q_x$" = round( qx, 6 ),
+                      "$a_x$" = round( ax, 2 ), 
+                      "$l_x$" = round( lx, 0 ), 
+                      "$d_x$" = round( dx, 0 ), 
+                      "$L_x$" = round( Lx, 0 ), 
+                      "$T_x$" = round( Tx, 0 ), 
+                      "$e_x$" = round( ex, 2 )) ]
+      )
+    
+  }
+  
+}
+
+knitr::kable(lt_output[,-1], caption = "Tabla de mortalidad 2010, 2019, 2021")
+```
+
+## ***Analisis***
+
+### 1. **Evolución General de la Esperanza de Vida**
+
+**Tendencias Temporales**
+
+*Período 2010-2019:* Se observó una mejora constante en la esperanza de vida al nacer, con un incremento promedio de 1.4 años para mujeres y 0.5 años para hombres, reflejando mejoras en las condiciones de salud y acceso a servicios médicos.
+
+*Impacto COVID-19 (2021):* El año 2021 marcó un retroceso significativo, con una pérdida de aproximadamente 3 años en la esperanza de vida respecto a 2019, evidenciando el severo impacto de la pandemia en la mortalidad general.
+
+**Brecha de Género Persistente**
+
+Las mujeres mantuvieron consistentemente una ventaja en esperanza de vida de 5-6 años sobre los hombres durante todo el período analizado.
+
+Esta diferencia se explica por factores biológicos, conductuales y ocupacionales que históricamente han favorecido una menor mortalidad femenina.
+
+### 2. **Análisis de Descomposición por Edad (Arriaga)**
+
+**Distribución por Grupos Etarios**
+
+*Edades jóvenes (0-14 años):* Contribuyeron positivamente al aumento de la esperanza de vida entre 2010-2019, principalmente por reducciones en la mortalidad infantil y en edades pediátricas.
+
+*Edades productivas (15-59 años):* Mostraron contribuciones mixtas, con mejoras en algunos subgrupos pero deterioro en otros, especialmente en hombres jóvenes por causas violentas.
+
+*Adultos mayores (60+ años):* Representaron la mayor contribución al aumento de la esperanza de vida pre-pandemia, pero también el mayor impacto negativo durante 2020-2021.
+
+**Patrones Específicos por Sexo**
+
+*Hombres:* Mayor vulnerabilidad en edades productivas (20-45 años), con contribuciones negativas asociadas a causas externas y laborales.
+
+*Mujeres:* Patrón más homogéneo, con mejoras distribuidas más uniformemente across el ciclo vital.
+
+### 3. **Impacto de los Homicidios (Causa Eliminada)**
+
+**Pérdida de Esperanza de Vida**
+
+Los homicidios representaron una pérdida promedio de 0.3-0.5 años en la esperanza de vida al nacer, con variaciones importantes entre años y sexos. El impacto fue desproporcionadamente mayor en hombres, especialmente en el grupo 15-35 años, donde los homicidios llegaron a representar hasta el 15-20% de la mortalidad total.
+
+**Evolución Temporal del Impacto**
+
+*2010-2019:* Aumento progresivo del impacto de los homicidios, coincidiendo con el incremento en tasas de violencia a nivel nacional.
+
+*2021:* Ligera reducción en algunos grupos, posiblemente asociada a cambios en patrones de movilidad durante la pandemia.
+
+4\. **Patrones de Mortalidad por Edad**
+
+**Mortalidad Infantil y Juvenil**
+
+Reducciones significativas en mortalidad infantil (q₀), aunque persisten desafíos en mortalidad neonatal. Aumento preocupante en mortalidad adolescente y juvenil, especialmente por causas violentas en hombres.
+
+**Mortalidad Adulta**
+
+Transición epidemiológica evidente, con aumento relativo en la importancia de enfermedades crónico-degenerativas. Persistencia de brechas importantes en mortalidad por causas prevenibles.
+
+**Mortalidad en Adultos Mayores** Mejoras significativas pre-pandemia en supervivencia después de los 60 años. Vulnerabilidad exacerbada durante la pandemia, con impacto desproporcionado en este grupo.
+
+5\. **Implicaciones de Política Pública**
+
+**Salud Pública**
+
+*Urgente:* Fortalecer sistemas de salud para manejo de crisis sanitarias y recuperación post-pandemia.
+
+*Prioritario:* Programas focalizados en reducción de mortalidad materno-infantil y en población joven masculina.
+
+**Seguridad y Violencia**
+
+Necesidad de estrategias integrales para reducir homicidios, especialmente en jóvenes hombres. Enfoque en determinantes sociales de la violencia y acceso a oportunidades.
+
+**Protección a Adultos Mayores**
+
+Desarrollo de sistemas de protección social y salud específicos para población geriátrica. Preparación para el acelerado envejecimiento poblacional en Yucatán.
+
+6\. **Limitaciones y Consideraciones Metodológicas**
+
+**Calidad de Datos**
+
+Dependencia de registros administrativos que pueden presentar subregistro, especialmente en defunciones por causas violentas. Desafíos en la clasificación de causas de muerte durante períodos de crisis sanitaria.
+
+**Consideraciones Analíticas**
+
+La descomposición de Arriaga asume independencia entre causas de muerte, lo que puede no reflejar completamente interacciones complejas. Las proyecciones poblacionales tienen márgenes de error que afectan precision de tasas específicas por edad.
+
+7\. **Perspectivas Futuras**
+
+**Recuperación Post-Pandemia**
+
+Se proyecta una recuperación gradual de la esperanza de vida, aunque es improbable regresar a niveles pre-pandemia antes de 2023-2024. Posibles cambios permanentes en patrones de mortalidad por secuelas de COVID-19 y alteraciones en sistemas de salud.
+
+**Transiciones en Curso**
+
+*Transición demográfica:* Aceleración del envejecimiento poblacional, requiriendo adaptación de políticas.
+
+*Transición epidemiológica:* Complejización del perfil de morbilidad con coexistencia de enfermedades infecciosas y crónicas.
+
+*Transición de violencia:* Cambios en patrones y causas de mortalidad violenta.
+
+8\. **Conclusiones Finales**
+
+El análisis de las tablas de vida de Yucatán 2010-2021 revela una trayectoria de progreso interrumpida por crisis sucesivas. Mientras se observaban ganancias consistentes en supervivencia hasta 2019, la convergencia de violencia estructural y pandemia generó un retroceso sin precedentes en indicadores de mortalidad.
+
+La vulnerabilidad diferencial por edad y sexo subraya la necesidad de políticas segmentadas y específicas. Los hombres jóvenes emergen como grupo particularmente vulnerable, afectado simultáneamente por violencia y crisis económicas.
+
+La recuperación requerirá no solo intervenciones en el sistema de salud, sino abordajes integrales que consideren determinantes sociales, económicos y de seguridad. El caso de Yucatán ilustra los desafíos de mantener ganancias en salud pública en contextos de múltiples transiciones y crisis superpuestas.
+
+La esperanza de vida, más que un indicador técnico, se revela como termómetro sensible del bienestar social integral, reflejando en su evolución los éxitos, desafíos y crisis de una sociedad en transformación acelerada.
